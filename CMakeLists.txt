@@ -63,10 +63,7 @@ include_directories(
 
 # Create an executable object type
 add_executable(${CMAKE_PROJECT_NAME}
-        User_File/Application/Motor/chassis.cpp
-        User_File/Application/Motor/chassis.h
-        User_File/Application/Motor/chassis.cpp
-
+   
 )
 include("${CMAKE_SOURCE_DIR}/User_Config/Linker/h7_linker.cmake")
 
@@ -223,7 +220,6 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
         User_File/Application/PowerControl/
         User_File/Application/Communication/
         User_File/Application/Balance/
-        User_File/Application/Motor/
 )
 
 # Add project symbols (macros)

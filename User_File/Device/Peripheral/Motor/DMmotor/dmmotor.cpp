@@ -122,26 +122,6 @@ void Class_DMMotor::FeedbackCallback(FDCAN_HandleTypeDef *callback_hfdcan,
                                             -motor->torque_max, motor->torque_max);
     motor->feedback.mos_temperature = data[6];
     motor->feedback.rotor_temperature = data[7];
-    motor->feedback_timestamp_us = SYS_Timestamp.Get_Now_Microsecond();
-}
-
-bool Class_DMMotor::GetFeedback(Struct_DMMotor_Feedback &out, uint64_t max_age_us) const
-{
-    const uint32_t primask = __get_PRIMASK();
-    __disable_irq();
-    __DMB();
-    const bool valid = feedback_initialized &&
-        SYS_Timestamp.Get_Now_Microsecond() - feedback_timestamp_us <= max_age_us;
-    if (valid)
-    {
-        out = feedback;
-    }
-    __DMB();
-    if (primask == 0U)
-    {
-        __enable_irq();
-    }
-    return valid;
 }
 
 /**

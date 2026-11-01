@@ -61,9 +61,6 @@ public:
                           float current_limit_ratio);
     void SetTorque(float torque_nm);
 
-    // 原子读取真实运动反馈；超时或尚未收到反馈返回 false，不修改 out。
-    bool GetFeedback(Struct_DMMotor_Feedback &out, uint64_t max_age_us) const;
-
     Struct_DMMotor_Feedback feedback;
 
 private:
@@ -88,7 +85,6 @@ private:
     float velocity_max = 30.0f;
     float torque_max = 10.0f;
     bool feedback_initialized = false;
-    uint64_t feedback_timestamp_us = 0;
     float last_position = 0.0f;
     int32_t total_round = 0;
 };
